@@ -116,7 +116,7 @@ drawConnectionPoints(QPainter* painter,
   auto const     &connectionStyle = StyleCollection::connectionStyle();
 
   float diameter = nodeStyle.ConnectionPointDiameter;
-  auto  reducedDiameter = diameter * 0.6;
+  auto  reducedDiameter = diameter;
 
   auto drawPoints =
     [&](PortType portType)
@@ -177,7 +177,10 @@ drawConnectionPoints(QPainter* painter,
         }
         else
         {
-          painter->setBrush(nodeStyle.ConnectionPointColor);
+          painter->setBrush(nodeStyle.NormalBoundaryColor);
+          QPen pen(nodeStyle.FilledConnectionPointColor);
+          pen.setWidthF(1.7);
+          painter->setPen(pen);
         }
 
         painter->drawEllipse(p,
@@ -229,8 +232,8 @@ drawFilledConnectionPoints(QPainter * painter,
           }
 
           painter->drawEllipse(p,
-                               diameter * 0.4,
-                               diameter * 0.4);
+                               diameter,
+                               diameter);
         }
       }
     };
@@ -283,6 +286,11 @@ drawEntryLabels(QPainter * painter,
                 NodeState const & state,
                 NodeDataModel const * model)
 {
+  QFont oldFont = painter->font();
+  QFont newFont("Arial", 7);
+  newFont.setBold(true);
+  painter->setFont(newFont);
+
   QFontMetrics const & metrics =
     painter->fontMetrics();
 
@@ -317,7 +325,7 @@ drawEntryLabels(QPainter * painter,
 
         auto rect = metrics.boundingRect(s);
 
-        p.setY(p.y() + rect.height() / 4.0);
+        p.setY(p.y() + rect.height() / 4.0 + 0.5);
 
         switch (portType)
         {
@@ -326,7 +334,7 @@ drawEntryLabels(QPainter * painter,
             break;
 
           case PortType::Out:
-            p.setX(geom.width() - 5.0 - rect.width());
+            p.setX(geom.width() - 3.0 - rect.width());
             break;
 
           default:
@@ -340,6 +348,8 @@ drawEntryLabels(QPainter * painter,
   drawPoints(PortType::Out);
 
   drawPoints(PortType::In);
+
+  painter->setFont(oldFont);
 }
 
 

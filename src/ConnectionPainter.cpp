@@ -137,7 +137,7 @@ paint(QPainter* painter,
   {
     QPen p;
 
-    p.setWidth(2 * lineWidth);
+    p.setWidth(lineWidth + 2);
     p.setColor(selected ?
                connectionStyle.selectedHaloColor() :
                hoverColor);
