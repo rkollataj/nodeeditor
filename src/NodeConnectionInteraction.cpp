@@ -246,12 +246,15 @@ bool
 NodeConnectionInteraction::
 nodePortIsEmpty(PortType portType, PortIndex portIndex) const
 {
-  NodeState const & nodeState = _node->nodeState();
+  //NodeState const & nodeState = _node->nodeState();
 
-  auto const & entries = nodeState.getEntries(portType);
+  //auto const & entries = nodeState.getEntries(portType);
 
-  if (entries[portIndex].empty()) return true;
+  //if (entries[portIndex].empty()) return true;
 
-  const auto outPolicy = _node->nodeDataModel()->portOutConnectionPolicy(portIndex);
-  return ( portType == PortType::Out && outPolicy == NodeDataModel::ConnectionPolicy::Many);
+  //const auto outPolicy = _node->nodeDataModel()->portOutConnectionPolicy(portIndex);
+  //return ( portType == PortType::Out && outPolicy == NodeDataModel::ConnectionPolicy::Many);
+  //
+  //TODO: Workaround to allow multiple incomming connections. Better solution needed here.
+    return true;
 }
