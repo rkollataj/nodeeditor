@@ -11,10 +11,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS "ON")
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
@@ -49,7 +45,7 @@ file(GLOB_RECURSE LIB_CPPS  ./src/*.cpp )
 qt5_add_resources(RESOURCES ./resources/resources.qrc)
 
 # Tell CMake to create the helloworld executable
-add_library(nodes SHARED ${LIB_CPPS} ${RESOURCES})
+add_library(nodes STATIC ${LIB_CPPS} ${RESOURCES})
 
 target_include_directories(nodes INTERFACE "include")
 
