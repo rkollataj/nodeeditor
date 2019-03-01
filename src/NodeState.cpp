@@ -18,6 +18,7 @@ NodeState(std::unique_ptr<NodeDataModel> const &model)
   , _reaction(NOT_REACTING)
   , _reactingPortType(PortType::None)
   , _resizing(false)
+  , _dataModel(model)
 {}
 
 
@@ -73,6 +74,21 @@ eraseConnection(PortType portType,
                 QUuid id)
 {
   getEntries(portType)[portIndex].erase(id);
+}
+
+void
+NodeState::
+updateConnectionsCount()
+{
+  const auto inCnt = _dataModel->nPorts(PortType::In);
+  if(_inConnections.size() != inCnt) {
+    _inConnections.resize(inCnt);
+  }
+
+  const auto outCnt = _dataModel->nPorts(PortType::Out);
+  if(_outConnections.size() != outCnt) {
+    _outConnections.resize(outCnt);
+  }
 }
 
 

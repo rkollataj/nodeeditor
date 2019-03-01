@@ -26,8 +26,6 @@ NodeGeometry(std::unique_ptr<NodeDataModel> const &dataModel)
   , _entryHeight(20)
   , _spacing(20)
   , _hovered(false)
-  , _nSources(dataModel->nPorts(PortType::Out))
-  , _nSinks(dataModel->nPorts(PortType::In))
   , _draggingPos(-1000, -1000)
   , _dataModel(dataModel)
   , _fontMetrics(QFont())
@@ -74,7 +72,7 @@ recalculateSize() const
   _entryHeight = _fontMetrics.height();
 
   {
-    unsigned int maxNumOfEntries = std::max(_nSinks, _nSources);
+    unsigned int maxNumOfEntries = std::max(nSinks(), nSources());
     unsigned int step = _entryHeight + _spacing;
     _height = step * maxNumOfEntries;
   }
@@ -289,6 +287,17 @@ validationWidth() const
   return _boldFontMetrics.boundingRect(msg).width();
 }
 
+unsigned int
+NodeGeometry::nSources() const
+{
+  return _dataModel->nPorts(PortType::Out);
+}
+
+unsigned int
+NodeGeometry::nSinks() const
+{
+  return _dataModel->nPorts(PortType::In);
+}
 
 QPointF
 NodeGeometry::

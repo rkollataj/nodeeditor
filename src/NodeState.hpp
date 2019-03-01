@@ -56,6 +56,9 @@ public:
                   PortIndex portIndex,
                   QUuid id);
 
+  void
+  updateConnectionsCount();
+
   ReactToConnectionState
   reaction() const;
 
@@ -91,5 +94,7 @@ private:
   NodeDataType _reactingDataType;
 
   bool _resizing;
+
+  std::unique_ptr<NodeDataModel> const &_dataModel;
 };
 }
