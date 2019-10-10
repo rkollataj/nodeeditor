@@ -53,8 +53,8 @@ canConnect(PortIndex &portIndex, bool& typeConversionNeeded, std::unique_ptr<Nod
   // 3) Node port is vacant
 
   // port should be empty
-  if (!nodePortIsEmpty(requiredPort, portIndex))
-    return false;
+  //if (!nodePortIsEmpty(requiredPort, portIndex))
+    //return false;
 
   // 4) Connection type equals node port type, or there is a registered type conversion that can translate between the two
 
