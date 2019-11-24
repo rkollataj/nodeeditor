@@ -85,6 +85,9 @@ public:
   NodeDataModel*
   nodeDataModel() const;
 
+  bool
+  connectionAlreadyExists(const Connection& newConn) const;
+
 public slots: // data propagation
 
   /// Propagates incoming data to the underlying model.

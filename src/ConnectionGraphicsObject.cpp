@@ -177,11 +177,11 @@ mouseMoveEvent(QGraphicsSceneMouseEvent* event)
   auto &state = _connection.connectionState();
 
   state.interactWithNode(node);
-  if (node)
-  {
-    node->reactToPossibleConnection(state.requiredPort(),
-                                    _connection.dataType(),
-                                    event->scenePos());
+
+  if (node) {
+      if (!node->connectionAlreadyExists(_connection)) {
+          node->reactToPossibleConnection(state.requiredPort(), _connection.dataType(), event->scenePos());
+      }
   }
 
   //-------------------

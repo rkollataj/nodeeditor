@@ -206,3 +206,33 @@ onDataUpdated(PortIndex index)
   for (auto const & c : connections)
     c.second->propagateData(nodeData);
 }
+
+bool
+Node::
+connectionAlreadyExists(const Connection& newConn) const
+{
+    bool alreadyConnected = false;
+    auto newOutNode = newConn.getNode(PortType::Out);
+    auto &connState = newConn.connectionState();
+
+    if (newOutNode) {
+
+        auto newId = newOutNode->id();
+        auto& oldConns = _nodeState.getEntries(connState.requiredPort());
+
+        for (auto& cMap : oldConns) {
+            for (auto& c : cMap) {
+                auto tmpNode = c.second->getNode(PortType::Out);
+
+                if (tmpNode) {
+                    if (tmpNode->id() == newId) {
+                        alreadyConnected = true;
+                    }
+                }
+            }
+        }
+    }
+
+    return alreadyConnected;
+}
+
