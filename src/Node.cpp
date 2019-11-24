@@ -11,6 +11,7 @@
 
 #include "ConnectionGraphicsObject.hpp"
 #include "ConnectionState.hpp"
+#include "Connection.hpp"
 
 using QtNodes::Node;
 using QtNodes::NodeGeometry;
