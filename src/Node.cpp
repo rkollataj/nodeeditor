@@ -11,7 +11,6 @@
 
 #include "ConnectionGraphicsObject.hpp"
 #include "ConnectionState.hpp"
-#include "Connection.hpp"
 
 using QtNodes::Node;
 using QtNodes::NodeGeometry;
@@ -210,7 +209,7 @@ onDataUpdated(PortIndex index)
 
 bool
 Node::
-connectionAlreadyExists(const Connection& newConn) const
+connectionAlreadyExists(const QtNodes::Connection& newConn) const
 {
     bool alreadyConnected = false;
     auto newOutNode = newConn.getNode(PortType::Out);
