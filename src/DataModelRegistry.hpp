@@ -8,7 +8,11 @@
 
 #include "NodeDataModel.hpp"
 #include "Export.hpp"
+
+// Qt 5.14 has std::hash specialization for QString defined
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "QStringStdHash.hpp"
+#endif
 
 namespace QtNodes
 {
