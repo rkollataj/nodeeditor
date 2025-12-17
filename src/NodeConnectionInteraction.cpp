@@ -167,8 +167,9 @@ disconnect(PortType portToDisconnect) const
 
   NodeState &state = _node->nodeState();
 
-  // clear pointer to Connection in the NodeState
-  state.getEntries(portToDisconnect)[portIndex].clear();
+  // since multiple connections are allowed, disconnect the currently selected connection only.
+  // so that the other connection information is not lost.
+  state.eraseConnection(portToDisconnect, portIndex, _connection->id());
 
   // 4) Propagate invalid data to IN node
   _connection->propagateEmptyData();
